@@ -100,53 +100,185 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
         />
       );
     case 10:
-      return <Slide7Activation slide={slide} />;
+      return (
+        <Slide7Activation 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 11:
-      return <Slide8ActivationPlanning slide={slide} />;
+      return (
+        <Slide8ActivationPlanning 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 12:
-      return <Slide9EngagementFunnel slide={slide} />;
+      return (
+        <Slide9EngagementFunnel 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 13:
-      return <Slide10FieldMarketing slide={slide} />;
+      return (
+        <Slide10FieldMarketing 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 14:
-      return <Slide11ExploreNewAreas slide={slide} />;
+      return (
+        <Slide11ExploreNewAreas 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 15:
-      return <Slide12LeadGenProcess slide={slide} />;
+      return (
+        <Slide12LeadGenProcess 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 16:
-      return <Slide13LeadQuality slide={slide} />;
+      return (
+        <Slide13LeadQuality 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 17:
-      return <Slide14MarketVisit slide={slide} />;
+      return (
+        <Slide14MarketVisit 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 18:
-      return <Slide15CompetitorTracking slide={slide} />;
+      return (
+        <Slide15CompetitorTracking 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 19:
-      return <Slide16MarketIntelReport slide={slide} />;
+      return (
+        <Slide16MarketIntelReport 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 20:
-      return <Slide17WhyReporting slide={slide} />;
+      return (
+        <Slide17WhyReporting 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 21:
-      return <Slide18DailyReporting slide={slide} />;
+      return (
+        <Slide18DailyReporting 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 22:
-      return <Slide19WeeklyReporting slide={slide} />;
+      return (
+        <Slide19WeeklyReporting 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 23:
-      return <Slide20WebApp slide={slide} />;
+      return (
+        <Slide20WebApp 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 24:
-      return <Slide21LeadEntry slide={slide} />;
+      return (
+        <Slide21LeadEntry 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 25:
-      return <Slide22ActivityEntry slide={slide} />;
+      return (
+        <Slide22ActivityEntry 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 26:
-      return <Slide23KPIs slide={slide} />;
+      return (
+        <Slide23KPIs 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 27:
-      return <Slide24Evaluation slide={slide} />;
+      return (
+        <Slide24Evaluation 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 28:
       return <Slide25Collaboration slide={slide} />;
     case 29:
-      return <Slide26DailyCycle slide={slide} />;
+      return (
+        <Slide26DailyCycle 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 30:
-      return <Slide27SelfReview slide={slide} />;
+      return (
+        <Slide27SelfReview 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 31:
-      return <Slide28First30Days slide={slide} />;
+      return (
+        <Slide28First30Days 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 32:
       return <Slide29DosDonts slide={slide} />;
     case 33:
-      return <Slide30Closing slide={slide} />;
+      return (
+        <Slide30Closing 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 34:
       return <Slide31Exercise slide={slide} />;
     default:
