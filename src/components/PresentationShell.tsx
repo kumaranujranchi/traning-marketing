@@ -46,11 +46,10 @@ export const PresentationShell: React.FC = () => {
   const currentSlide = SLIDES[currentIndex];
   const maxStepsOnCurrentSlide = getSlideMaxSteps(currentSlide);
 
-  // Sync index to clean URL query parameter (?slide=X)
+  // Keep browser URL 100% clean (zero query params, zero # hash)
   useEffect(() => {
     const slideNumber = currentIndex + 1;
-    const cleanUrl = `${window.location.pathname}?slide=${slideNumber}`;
-    window.history.replaceState({ slide: slideNumber }, '', cleanUrl);
+    window.history.replaceState({ slide: slideNumber }, '', window.location.pathname);
     setRevealedCount(isRevealAllMode ? maxStepsOnCurrentSlide : 1);
   }, [currentIndex, isRevealAllMode, maxStepsOnCurrentSlide]);
 
