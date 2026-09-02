@@ -148,17 +148,20 @@ export const Slide5BTLProcess: React.FC<{
 
       {/* 3 Phases: Before, During, After with Step Reveal */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-        {stages.map((stage: any, idx: number) => {
+        {stages && stages.map((stage: any, idx: number) => {
           const isRevealed = idx < revealedCount;
+          const stageTitle = stage.stage || stage.title || `Phase 0${idx + 1}`;
+          const itemsList = stage.items || [];
+
           return (
             <div 
               key={idx}
               onClick={() => onOpenReference && onOpenReference({
-                title: stage.title,
+                title: stageTitle,
                 category: `STAGE 0${idx+1}`,
-                tag: stage.badge,
-                description: `Mandatory operational phase: ${stage.title}`,
-                deliverables: stage.items,
+                tag: stage.tag || stage.subtitle,
+                description: `Mandatory operational phase: ${stageTitle}`,
+                deliverables: itemsList.map((it: any) => typeof it === 'string' ? it : `${it.main}: ${it.detail}`),
                 executionTips: ['Execute every checkpoint in chronological order without skipping prerequisites.']
               })}
               className={`glass-card p-4 sm:p-5 rounded-3xl flex flex-col justify-between border-slate-700/60 transition-all ${
@@ -172,21 +175,33 @@ export const Slide5BTLProcess: React.FC<{
                       0{idx + 1}
                     </span>
                     <h3 className="text-sm sm:text-base font-bold text-white font-display">
-                      {stage.title}
+                      {stageTitle}
                     </h3>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
-                    {stage.badge}
+                    {stage.tag || stage.subtitle || 'Phase'}
                   </span>
                 </div>
 
-                <div className="space-y-2">
-                  {stage.items.map((item: string, i: number) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
+                <div className="space-y-2.5">
+                  {itemsList.map((item: any, i: number) => {
+                    const mainText = typeof item === 'string' ? item : item.main;
+                    const detailText = typeof item === 'string' ? '' : item.detail;
+
+                    return (
+                      <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-semibold text-white">{mainText}</span>
+                          {detailText && (
+                            <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                              {detailText}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -195,9 +210,11 @@ export const Slide5BTLProcess: React.FC<{
       </div>
 
       {/* Golden Rule Banner */}
-      <div className="p-3 rounded-2xl bg-gradient-to-r from-rose-500/20 to-cyan-500/20 border border-rose-500/40 text-center text-xs font-semibold text-white">
-        “{goldenRule}”
-      </div>
+      {goldenRule && (
+        <div className="p-3 rounded-2xl bg-gradient-to-r from-rose-500/20 to-cyan-500/20 border border-rose-500/40 text-center text-xs font-semibold text-white">
+          “{goldenRule}”
+        </div>
+      )}
     </div>
   );
 };
@@ -207,7 +224,7 @@ export const Slide6BTLChecklist: React.FC<{
   revealedCount?: number;
   onOpenReference?: (data: CardReferenceData) => void;
 }> = ({ slide, revealedCount = 99, onOpenReference }) => {
-  const { checkpoints } = slide.data;
+  const { checkpoints, goldenRule } = slide.data;
 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col justify-center h-full py-2 px-2 sm:px-6">
@@ -227,17 +244,20 @@ export const Slide6BTLChecklist: React.FC<{
 
       {/* Checkpoint Grid with Step Reveal */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-        {checkpoints.map((item: any, idx: number) => {
+        {checkpoints && checkpoints.map((item: any, idx: number) => {
           const isRevealed = idx < revealedCount;
+          const title = item.text || item.title || `Checkpoint 0${idx + 1}`;
+          const desc = item.desc || item.detail || '';
+
           return (
             <div 
               key={idx}
               onClick={() => onOpenReference && onOpenReference({
-                title: item.title,
+                title: title,
                 category: 'QUALITY CHECKPOINT',
-                tag: item.tag,
-                description: item.desc,
-                deliverables: [`Standard: ${item.desc}`, 'Must be checked before starting activity.'],
+                tag: item.tag || 'Standard',
+                description: desc || title,
+                deliverables: [`Standard: ${desc || title}`, 'Must be checked before starting activity.'],
                 executionTips: ['Never compromise on brand aesthetics or canopy lighting.']
               })}
               className={`p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-400 transition-all cursor-pointer flex flex-col justify-between ${
@@ -246,22 +266,32 @@ export const Slide6BTLChecklist: React.FC<{
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-xs font-bold text-cyan-400">#{item.num}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                    {item.tag}
-                  </span>
+                  <span className="font-mono text-xs font-bold text-cyan-400">#{item.id || item.num || idx + 1}</span>
+                  {item.tag && (
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                      {item.tag}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-xs sm:text-sm font-bold text-white mb-1">
-                  {item.title}
+                  {title}
                 </h3>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
-                  {item.desc}
-                </p>
+                {desc && (
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    {desc}
+                  </p>
+                )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {goldenRule && (
+        <div className="p-3 rounded-2xl bg-gradient-to-r from-rose-500/20 to-cyan-500/20 border border-rose-500/40 text-center text-xs font-semibold text-white">
+          “{goldenRule}”
+        </div>
+      )}
     </div>
   );
 };
