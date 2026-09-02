@@ -1,11 +1,10 @@
 // Vastu Vihar Marketing Keynote Service Worker
-// Enables 100% Offline Capability across all 29 Slides
+// Enables 100% Offline Capability across all slides
 
-const CACHE_NAME = 'vastu-vihar-keynote-v1';
+const CACHE_NAME = 'vastu-vihar-keynote-v2';
 
 const STATIC_ASSETS = [
   '/',
-  '/index.html',
   '/manifest.json'
 ];
 
@@ -31,28 +30,46 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // For navigation requests (HTML pages), try cache first, fall back to network, or offline cache
+  // Only handle GET requests with http/https
+  if (request.method !== 'GET' || !request.url.startsWith('http')) {
+    return;
+  }
+
+  // For navigation requests (HTML pages): Network First with Cache Fallback
   if (request.mode === 'navigate') {
     event.respondWith(
-      caches.match('/index.html').then((cached) => {
-        return cached || fetch(request).then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+      fetch(request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
           return response;
-        });
-      }).catch(() => caches.match('/index.html'))
+        })
+        .catch(() => {
+          return caches.match(request).then((cached) => cached || caches.match('/'));
+        })
     );
     return;
   }
 
-  // For JS, CSS, Google Fonts, Images, Audio, SVGs: Cache First with Network Fallback & Auto-cache
+  // For static assets (JS, CSS, fonts, images): Cache First with Network Fallback
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
+        // Fetch in background to update cache for next time
+        fetch(request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+            }
+          })
+          .catch(() => {});
         return cachedResponse;
       }
+
       return fetch(request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'error') {
+        if (!networkResponse || networkResponse.status !== 200) {
           return networkResponse;
         }
         const responseToCache = networkResponse.clone();
@@ -60,10 +77,8 @@ self.addEventListener('fetch', (event) => {
           cache.put(request, responseToCache);
         });
         return networkResponse;
-      }).catch(() => {
-        // If offline and request is in cache, already handled above
-        return caches.match(request);
       });
     })
   );
 });
+
