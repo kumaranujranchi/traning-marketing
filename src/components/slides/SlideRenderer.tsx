@@ -6,9 +6,9 @@ import { Slide2Objectives, Slide3Transition, Slide4Responsibilities } from './Sl
 import { Slide3SalesVsMarketing, Slide4ATLvsBTL } from './SlideFundamentals';
 import { Slide4BTL, Slide5BTLProcess, Slide6BTLChecklist } from './SlideBTL';
 import { Slide7Activation, Slide8ActivationPlanning, Slide9EngagementFunnel } from './SlideActivation';
-import { Slide10FieldMarketing, Slide11ExploreNewAreas, Slide12LeadGenProcess, Slide13LeadQuality } from './SlideFieldMarketing';
-import { Slide14MarketVisit, Slide15CompetitorTracking, Slide16MarketIntelReport } from './SlideMarketIntel';
-import { Slide17WhyReporting, Slide18DailyReporting, Slide19WeeklyReporting } from './SlideReporting';
+import { Slide10FieldMarketing, Slide11ExploreNewAreas, Slide12LeadGenProcess } from './SlideFieldMarketing';
+import { SlideFieldIntelligenceHub } from './SlideFieldIntelligenceHub';
+import { Slide19WeeklyReporting } from './SlideReporting';
 import { Slide20WebApp, Slide21LeadEntry, Slide22ActivityEntry } from './SlideWebApp';
 import { Slide23KPIs, Slide24Evaluation } from './SlideKPI';
 import { Slide25Collaboration } from './SlideCollaboration';
@@ -147,9 +147,10 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onOpenReference={onOpenReference} 
         />
       );
+    // Consolidated Slide 16 (includes 16 to 21)
     case 16:
       return (
-        <Slide13LeadQuality 
+        <SlideFieldIntelligenceHub 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -157,7 +158,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 17:
       return (
-        <Slide14MarketVisit 
+        <Slide19WeeklyReporting 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -165,7 +166,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 18:
       return (
-        <Slide15CompetitorTracking 
+        <Slide20WebApp 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -173,7 +174,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 19:
       return (
-        <Slide16MarketIntelReport 
+        <Slide21LeadEntry 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -181,7 +182,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 20:
       return (
-        <Slide17WhyReporting 
+        <Slide22ActivityEntry 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -189,7 +190,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 21:
       return (
-        <Slide18DailyReporting 
+        <Slide23KPIs 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
@@ -197,55 +198,15 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       );
     case 22:
       return (
-        <Slide19WeeklyReporting 
-          slide={slide} 
-          revealedCount={revealedCount} 
-          onOpenReference={onOpenReference} 
-        />
-      );
-    case 23:
-      return (
-        <Slide20WebApp 
-          slide={slide} 
-          revealedCount={revealedCount} 
-          onOpenReference={onOpenReference} 
-        />
-      );
-    case 24:
-      return (
-        <Slide21LeadEntry 
-          slide={slide} 
-          revealedCount={revealedCount} 
-          onOpenReference={onOpenReference} 
-        />
-      );
-    case 25:
-      return (
-        <Slide22ActivityEntry 
-          slide={slide} 
-          revealedCount={revealedCount} 
-          onOpenReference={onOpenReference} 
-        />
-      );
-    case 26:
-      return (
-        <Slide23KPIs 
-          slide={slide} 
-          revealedCount={revealedCount} 
-          onOpenReference={onOpenReference} 
-        />
-      );
-    case 27:
-      return (
         <Slide24Evaluation 
           slide={slide} 
           revealedCount={revealedCount} 
           onOpenReference={onOpenReference} 
         />
       );
-    case 28:
+    case 23:
       return <Slide25Collaboration slide={slide} />;
-    case 29:
+    case 24:
       return (
         <Slide26DailyCycle 
           slide={slide} 
@@ -253,7 +214,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onOpenReference={onOpenReference} 
         />
       );
-    case 30:
+    case 25:
       return (
         <Slide27SelfReview 
           slide={slide} 
@@ -261,7 +222,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onOpenReference={onOpenReference} 
         />
       );
-    case 31:
+    case 26:
       return (
         <Slide28First30Days 
           slide={slide} 
@@ -269,9 +230,9 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onOpenReference={onOpenReference} 
         />
       );
-    case 32:
+    case 27:
       return <Slide29DosDonts slide={slide} />;
-    case 33:
+    case 28:
       return (
         <Slide30Closing 
           slide={slide} 
@@ -279,7 +240,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onOpenReference={onOpenReference} 
         />
       );
-    case 34:
+    case 29:
       return <Slide31Exercise slide={slide} />;
     default:
       return <Slide1Cover slide={slide} onJumpSlide={onJumpSlide} />;
