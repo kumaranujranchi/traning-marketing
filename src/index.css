@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --vv-navy: #0B142B;
+  --vv-navy-dark: #060B18;
+  --vv-navy-light: #162447;
+  --vv-crimson: #E11D48;
+  --vv-crimson-glow: rgba(225, 29, 72, 0.45);
+  --vv-cyan: #0EA5E9;
+  --vv-cyan-glow: rgba(14, 165, 233, 0.45);
+  --vv-gold: #F59E0B;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #060B18;
+  color: #f1f5f9;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dynamic Animated Background Mesh */
+.vv-mesh-bg {
+  background: 
+    radial-gradient(at 0% 0%, rgba(225, 29, 72, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(30, 58, 138, 0.25) 0px, transparent 60%),
+    radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.12) 0px, transparent 40%),
+    #060B18;
+}
+
+/* Smooth ambient light beams */
+@keyframes beamFloat1 {
+  0%, 100% { transform: translate(0px, 0px); opacity: 0.35; }
+  50% { transform: translate(40px, 30px); opacity: 0.6; }
+}
+
+@keyframes beamFloat2 {
+  0%, 100% { transform: translate(0px, 0px); opacity: 0.3; }
+  50% { transform: translate(-40px, 20px); opacity: 0.55; }
+}
+
+.animate-beam-1 {
+  animation: beamFloat1 16s ease-in-out infinite;
+}
+
+.animate-beam-2 {
+  animation: beamFloat2 18s ease-in-out infinite;
+}
+
+/* Cinematic 3D Slide Transitions */
+@keyframes slideInNext3D {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) translate3d(30px, 0, -40px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes slideInPrev3D {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) translate3d(-30px, 0, -40px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.slide-transition-next {
+  animation: slideInNext3D 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+.slide-transition-prev {
+  animation: slideInPrev3D 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Progressive Card Reveal Build-In Animation */
+@keyframes cardBuildIn {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) translateY(24px) scale(0.94);
+    box-shadow: 0 0 0 rgba(14, 165, 233, 0);
+  }
+  60% {
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.5), 0 0 15px rgba(225, 29, 72, 0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) translateY(0) scale(1);
+    box-shadow: 
+      0 12px 32px -4px rgba(0, 0, 0, 0.65),
+      0 0 20px rgba(14, 165, 233, 0.15),
+      inset 0 1px 1px rgba(255, 255, 255, 0.22);
+  }
+}
+
+.card-revealed {
+  animation: cardBuildIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform, box-shadow;
+}
+
+.card-hidden {
+  opacity: 0.12 !important;
+  pointer-events: none !important;
+  filter: grayscale(80%) blur(1px) !important;
+  transform: perspective(800px) translateY(12px) scale(0.97) !important;
+  border-style: dashed !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 3D Glassmorphism & Radiant Glowing Effect */
+.glass-panel {
+  background: rgba(11, 20, 43, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(14, 165, 233, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(26, 43, 82, 0.7) 0%, rgba(11, 20, 43, 0.85) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 12px 32px -4px rgba(0, 0, 0, 0.65),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(14, 165, 233, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+  transform: perspective(1000px) translateZ(0);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: rgba(14, 165, 233, 0.65);
+  transform: perspective(1000px) translateY(-4px) scale(1.015);
+  box-shadow: 
+    0 24px 48px -8px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(14, 165, 233, 0.35),
+    0 0 10px rgba(225, 29, 72, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+/* 3D Glowing Card for Crimson/Rose Highlights */
+.glass-card-crimson {
+  background: linear-gradient(135deg, rgba(45, 15, 30, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  box-shadow: 
+    0 12px 32px -4px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(225, 29, 72, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: perspective(1000px) translateZ(0);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-crimson:hover {
+  border-color: rgba(225, 29, 72, 0.75);
+  transform: perspective(1000px) translateY(-4px) scale(1.015);
+  box-shadow: 
+    0 24px 48px -8px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(225, 29, 72, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 20, 43, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 165, 233, 0.6);
+}
+
+input, textarea, select {
+  user-select: text;
+}
