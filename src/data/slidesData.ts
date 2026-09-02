@@ -14,6 +14,8 @@ export interface SlideContent {
 export const getSlideMaxSteps = (slide: SlideContent): number => {
   if (!slide || !slide.data) return 1;
   const d = slide.data;
+  if (d.nowMarketing) return d.nowMarketing.length;
+  if (d.earlierSales && !d.nowMarketing) return d.earlierSales.length;
   if (d.objectives) return d.objectives.length;
   if (d.coreComparison) return d.coreComparison.length;
   if (d.concepts) return d.concepts.length;
@@ -21,12 +23,18 @@ export const getSlideMaxSteps = (slide: SlideContent): number => {
   if (d.activities) return d.activities.length;
   if (d.stages) return d.stages.length;
   if (d.checkpoints) return d.checkpoints.length;
+  if (d.whyActivation) return d.whyActivation.length;
   if (d.touchpoints) return d.touchpoints.length;
   if (d.questions) return d.questions.length;
   if (d.funnel) return d.funnel.length;
   if (d.responsibilities) return d.responsibilities.length;
   if (d.channels) return d.channels.length;
   if (d.steps) return d.steps.length;
+  if (d.checklist) return d.checklist.length;
+  if (d.trackingAreas) return d.trackingAreas.length;
+  if (d.components) return d.components.length;
+  if (d.reasons) return d.reasons.length;
+  if (d.deliverables) return d.deliverables.length;
   if (d.matrix) return d.matrix.length;
   if (d.modules) return d.modules.length;
   if (d.fields) return d.fields.length;
@@ -36,6 +44,7 @@ export const getSlideMaxSteps = (slide: SlideContent): number => {
   if (d.cycle) return d.cycle.length;
   if (d.weeks) return d.weeks.length;
   if (d.dos) return 2;
+  if (d.factors) return d.factors.length;
   if (d.equation && d.equation.factors) return d.equation.factors.length;
   return 1;
 };

@@ -76,11 +76,29 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
         />
       );
     case 7:
-      return <Slide4BTL slide={slide} />;
+      return (
+        <Slide4BTL 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 8:
-      return <Slide5BTLProcess slide={slide} />;
+      return (
+        <Slide5BTLProcess 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 9:
-      return <Slide6BTLChecklist slide={slide} />;
+      return (
+        <Slide6BTLChecklist 
+          slide={slide} 
+          revealedCount={revealedCount} 
+          onOpenReference={onOpenReference} 
+        />
+      );
     case 10:
       return <Slide7Activation slide={slide} />;
     case 11:
