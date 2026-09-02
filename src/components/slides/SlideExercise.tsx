@@ -6,14 +6,19 @@ import {
   CheckCircle2, 
   Edit3,
   Building2,
-  Sparkles
+  Sparkles,
+  Home,
+  Trash2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SlideContent } from '../../data/slidesData';
 
 const STORAGE_KEY = 'marketing_training_slide29_exercise';
 
-export const Slide31Exercise: React.FC<{ slide: SlideContent }> = ({ slide }) => {
+export const Slide31Exercise: React.FC<{ 
+  slide: SlideContent;
+  onJumpSlide?: (index: number) => void;
+}> = ({ slide, onJumpSlide }) => {
   const d = slide.data || {};
   const fields = d.fields || [];
   const instructions = d.instructions || 'Each trainee must design their first marketing activity for Vastu Vihar townships using the 10 planning fields below.';
@@ -61,11 +66,19 @@ export const Slide31Exercise: React.FC<{ slide: SlideContent }> = ({ slide }) =>
     }
   };
 
-  const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset your exercise answers?')) {
+  const handleClearForm = () => {
+    if (window.confirm('Are you sure you want to clear your exercise form answers?')) {
       setFormData({});
       localStorage.removeItem(STORAGE_KEY);
       setIsSaved(false);
+    }
+  };
+
+  const handleRestartPresentation = () => {
+    if (onJumpSlide) {
+      onJumpSlide(0);
+    } else {
+      window.location.reload();
     }
   };
 
@@ -83,23 +96,36 @@ export const Slide31Exercise: React.FC<{ slide: SlideContent }> = ({ slide }) =>
           <span className="text-xs font-mono text-slate-400">SLIDE 29 / 29</span>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons Header */}
         <div className="flex items-center gap-2">
+          {/* Prominent Restart Keynote Button */}
+          <button
+            type="button"
+            onClick={handleRestartPresentation}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold transition-all shadow-md active:scale-95"
+            title="Restart Presentation from Slide 1"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Restart Presentation</span>
+          </button>
+
           <button
             type="button"
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition-colors"
           >
             <Printer className="w-3.5 h-3.5 text-cyan-400" />
             <span className="hidden sm:inline">Print / PDF</span>
           </button>
+
           <button
             type="button"
-            onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-rose-300 border border-slate-700 text-xs font-medium transition-colors"
+            onClick={handleClearForm}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-rose-300 border border-slate-700 text-xs font-medium transition-colors"
+            title="Clear form inputs"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Reset</span>
+            <Trash2 className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Clear Form</span>
           </button>
         </div>
       </div>
@@ -154,13 +180,22 @@ export const Slide31Exercise: React.FC<{ slide: SlideContent }> = ({ slide }) =>
           <span className="text-[10px] font-mono text-slate-400">
             Answers are auto-saved to your browser storage.
           </span>
-          <button
-            type="submit"
-            className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-950/40 transition-all active:scale-95"
-          >
-            <Save className="w-4 h-4" />
-            <span>Save & Complete Assignment</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleRestartPresentation}
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-cyan-300 font-bold text-xs border border-slate-700 transition-all"
+            >
+              Restart Keynote (Slide 1)
+            </button>
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-950/40 transition-all active:scale-95"
+            >
+              <Save className="w-4 h-4" />
+              <span>Save & Complete Assignment</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>

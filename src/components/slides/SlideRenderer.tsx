@@ -241,7 +241,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
         />
       );
     case 29:
-      return <Slide31Exercise slide={slide} />;
+      return <Slide31Exercise slide={slide} onJumpSlide={onJumpSlide} />;
     default:
       return <Slide1Cover slide={slide} onJumpSlide={onJumpSlide} />;
   }

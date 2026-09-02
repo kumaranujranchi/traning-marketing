@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, Eye, EyeOff, Layers } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, RotateCcw, Eye, EyeOff, Layers } from 'lucide-react';
 
 interface BottomHUDProps {
   currentIndex: number;
@@ -96,11 +96,11 @@ export const BottomHUD: React.FC<BottomHUDProps> = ({
               {!isRevealAllMode && revealedCount < maxSteps
                 ? `Reveal (0${revealedCount + 1})`
                 : currentIndex === totalSlides - 1
-                ? 'Finish'
+                ? 'Restart (Slide 1)'
                 : 'Next'}
             </span>
             {currentIndex === totalSlides - 1 && (!maxSteps || revealedCount >= maxSteps) ? (
-              <CheckCircle className="w-4 h-4 text-slate-950" />
+              <RotateCcw className="w-4 h-4 text-slate-950" />
             ) : (
               <ChevronRight className="w-4 h-4 text-slate-950" />
             )}

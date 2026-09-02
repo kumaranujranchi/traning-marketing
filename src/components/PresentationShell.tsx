@@ -75,10 +75,14 @@ export const PresentationShell: React.FC = () => {
       // Step-by-step card reveal on key press
       setRevealedCount(prev => prev + 1);
     } else {
-      // All cards revealed -> Advance to next slide
+      // All cards revealed -> Advance to next slide or restart from slide 1
       if (currentIndex < SLIDES.length - 1) {
         setSlideDirection('next');
         setCurrentIndex(prev => prev + 1);
+        setRevealedCount(isRevealAllMode ? 99 : 1);
+      } else {
+        setSlideDirection('prev');
+        setCurrentIndex(0);
         setRevealedCount(isRevealAllMode ? 99 : 1);
       }
     }
