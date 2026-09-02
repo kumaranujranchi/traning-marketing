@@ -3,95 +3,109 @@ import {
   ArrowRight, 
   RefreshCw, 
   Users, 
-  UserCheck 
+  UserCheck, 
+  CheckCircle2, 
+  Sparkles, 
+  TrendingUp 
 } from 'lucide-react';
 import { SlideContent } from '../../data/slidesData';
+import { CardReferenceData } from '../CardReferenceModal';
 
-export const Slide25Collaboration: React.FC<{ slide: SlideContent }> = ({ slide }) => {
-  const { marketingFlow, salesFlow, loopFormula, tagline } = slide.data;
+export const Slide25Collaboration: React.FC<{ 
+  slide: SlideContent;
+  revealedCount?: number;
+  onOpenReference?: (data: CardReferenceData) => void;
+}> = ({ slide, revealedCount = 99, onOpenReference }) => {
+  const d = slide.data || {};
+  const touchpoints = d.touchpoints || [
+    { num: '01', title: 'Immediate Lead Handover', rule: 'Within 2 hours', desc: 'Share verified contact, context notes, configuration preference, and hot/warm status immediately.' },
+    { num: '02', title: 'Joint Territory Briefings', rule: 'Weekly alignment', desc: 'Marketing shares upcoming activation calendar; Sales shares inventory priorities and customer feedback.' },
+    { num: '03', title: 'Site Visit Coordination', rule: 'Active follow-through', desc: 'Marketing alerts Sales when an activation prospect schedules an upcoming sample flat visit.' },
+    { num: '04', title: 'Closed-Loop Quality Feedback', rule: 'Continuous improvement', desc: 'Sales provides structured feedback on lead relevance to help Marketing refine future catchments.' }
+  ];
 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col justify-center h-full py-2 px-2 sm:px-6">
-      <div className="flex items-center gap-2 mb-2 animate-slide-up">
+      <div className="flex items-center gap-2 mb-2">
         <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/40">
-          PART 4 — SYNERGY
+          PART 8 — SYNERGY
         </span>
-        <span className="text-xs font-mono text-slate-400">SLIDE 25 / 31</span>
+        <span className="text-xs font-mono text-slate-400">SLIDE 23 / 29</span>
       </div>
 
-      <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-1.5 animate-slide-up stagger-1">
-        Marketing & Sales Must Work Together
+      <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-1.5">
+        Sales + Marketing: One Unified Revenue Engine
       </h2>
-      <p className="text-xs sm:text-sm text-slate-400 mb-4 animate-slide-up stagger-2">
-        Creating a seamless revenue engine through continuous bi-directional feedback
+      <p className="text-xs sm:text-sm text-slate-300 mb-3.5">
+        {slide.subtitle || 'Building a seamless bridge between demand generation and deal conversion'}
       </p>
 
-      {/* Dual Flow Detailed Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4">
-        {/* Marketing Engine */}
-        <div className="p-4 sm:p-5 rounded-3xl bg-slate-900/85 border-2 border-cyan-500/40 shadow-xl animate-slide-up stagger-2">
-          <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800">
-            <h3 className="text-base sm:text-lg font-bold text-cyan-300 flex items-center gap-2 font-display">
-              <Users className="w-5 h-5 text-cyan-400" /> {marketingFlow.title}
-            </h3>
-            <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
-              {marketingFlow.tag}
-            </span>
+      {/* Dual Roles Header */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+        <div className="p-3.5 rounded-2xl bg-cyan-950/40 border border-cyan-500/40 flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-cyan-500/20 text-cyan-400">
+            <Users className="w-5 h-5" />
           </div>
-
-          <div className="space-y-2">
-            {marketingFlow.steps.map((step: any, idx: number) => (
-              <div key={idx} className="p-2.5 rounded-xl bg-slate-800/70 border border-cyan-500/20 flex flex-col">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                    {step.name}
-                  </span>
-                  <span className="text-[10px] font-mono text-cyan-400 font-bold">0{idx + 1}</span>
-                </div>
-                <span className="text-[11px] text-slate-300 mt-0.5 ml-3 leading-tight">{step.desc}</span>
-              </div>
-            ))}
+          <div>
+            <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase block">MARKETING ROLE</span>
+            <span className="text-xs sm:text-sm font-bold text-white">
+              {d.marketingRole || 'Creates Demand & Delivers Qualified Prospects'}
+            </span>
           </div>
         </div>
 
-        {/* Sales Engine */}
-        <div className="p-4 sm:p-5 rounded-3xl bg-slate-900/85 border-2 border-indigo-500/40 shadow-xl animate-slide-up stagger-3">
-          <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800">
-            <h3 className="text-base sm:text-lg font-bold text-indigo-300 flex items-center gap-2 font-display">
-              <UserCheck className="w-5 h-5 text-indigo-400" /> {salesFlow.title}
-            </h3>
-            <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
-              {salesFlow.tag}
-            </span>
+        <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/40 flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400">
+            <UserCheck className="w-5 h-5" />
           </div>
-
-          <div className="space-y-2">
-            {salesFlow.steps.map((step: any, idx: number) => (
-              <div key={idx} className="p-2.5 rounded-xl bg-slate-800/70 border border-indigo-500/20 flex flex-col">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-                    {step.name}
-                  </span>
-                  <span className="text-[10px] font-mono text-indigo-400 font-bold">0{idx + 1}</span>
-                </div>
-                <span className="text-[11px] text-slate-300 mt-0.5 ml-3 leading-tight">{step.desc}</span>
-              </div>
-            ))}
+          <div>
+            <span className="text-[10px] font-mono text-indigo-400 font-bold uppercase block">SALES ROLE</span>
+            <span className="text-xs sm:text-sm font-bold text-white">
+              {d.salesRole || 'Nurtures Interest & Converts to Confirmed Bookings'}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Continuous Loop Banner */}
-      <div className="p-3.5 sm:p-4 rounded-3xl bg-gradient-to-r from-sky-950/60 via-slate-900/90 to-rose-950/60 border border-sky-500/40 text-center shadow-2xl animate-slide-up stagger-4">
-        <div className="flex items-center justify-center gap-2 mb-1 text-sky-400 text-xs font-mono font-bold uppercase tracking-wider">
-          <RefreshCw className="w-4 h-4 animate-spin text-amber-400" style={{ animationDuration: '8s' }} />
-          {tagline}
-        </div>
-        <div className="text-sm sm:text-lg font-mono font-bold text-white tracking-wide">
-          {loopFormula}
-        </div>
+      {/* 4 Touchpoints Grid with Step Reveal */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+        {touchpoints.map((tp: any, idx: number) => {
+          const isRevealed = idx < revealedCount;
+          return (
+            <div 
+              key={idx}
+              onClick={() => onOpenReference && onOpenReference({
+                title: tp.title,
+                category: 'SYNERGY PROTOCOL',
+                tag: tp.rule,
+                description: tp.desc,
+                deliverables: [`Standard: ${tp.desc}`, `Rhythm: ${tp.rule}`],
+                executionTips: ['Never hold back hot leads. Immediate speed to lead determines booking success.']
+              })}
+              className={`glass-card p-3.5 sm:p-4 rounded-2xl flex flex-col justify-between border-slate-700/60 transition-all ${
+                isRevealed ? 'card-revealed cursor-pointer hover:border-cyan-400' : 'card-hidden'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="font-mono text-xs font-bold text-sky-400">PROTOCOL 0{idx + 1}</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">
+                    {tp.rule}
+                  </span>
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-white mb-1">{tp.title}</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">{tp.desc}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Golden Quote */}
+      <div className="p-3 rounded-2xl bg-gradient-to-r from-sky-950/60 via-slate-900 to-indigo-950/60 border border-sky-500/40 text-center">
+        <span className="text-xs sm:text-sm font-bold text-white">
+          {d.goldenQuote || '“When Marketing and Sales operate in perfect alignment, revenue targets become inevitable milestones.”'}
+        </span>
       </div>
     </div>
   );
